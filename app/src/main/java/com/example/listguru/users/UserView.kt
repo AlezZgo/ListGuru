@@ -9,19 +9,21 @@ import com.example.listguru.UserUI
 import com.example.listguru.databinding.ViewUserBinding
 
 @SuppressLint("ViewConstructor")
-class UserView  @JvmOverloads constructor(
+class UserView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0,
-    user: UserUI? = null,) :
-    androidx.cardview.widget.CardView(context, attrs, defStyle) {
+    user: UserUI? = null,
+) : androidx.cardview.widget.CardView(context, attrs, defStyle) {
 
-    init {
-        val binding = ViewUserBinding.inflate(
+    private val binding by lazy {
+        ViewUserBinding.inflate(
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
             this,
             true)
+    }
 
+    init {
         parent.apply {
             radius = 8F
             cardElevation = 8F
@@ -36,13 +38,20 @@ class UserView  @JvmOverloads constructor(
             0
         ).apply {
             binding.tvName.text = getString(R.styleable.UserView_name)
-            binding.tvAge.text = getInt(R.styleable.UserView_age,0).toString()
+            binding.tvAge.text = getInt(R.styleable.UserView_age, 0).toString()
         }
         user?.let {
             binding.tvName.text = user.name
             binding.tvAge.text = user.age.toString()
         }
 
+    }
+
+    fun onAgeClickListener(block : () ->Unit) : UserView {
+        binding.tvAge.setOnClickListener {
+            block()
+        }
+        return this
     }
 
 
