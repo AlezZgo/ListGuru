@@ -34,10 +34,4 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnNextFragment"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Next Fragment 3" />
 </LinearLayout>
