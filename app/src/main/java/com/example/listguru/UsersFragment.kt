@@ -22,48 +22,6 @@ class UsersFragment : Fragment() {
     ): View? {
         binding = UsersFragmentBinding.inflate(inflater)
 
-        binding.llUsers.apply {
-            addView(
-                TextView(requireContext()).apply {
-                    text = "Hello world"
-                }
-            )
-            addView(
-                ImageView(requireContext()).apply {
-                    setImageResource(R.drawable.app_icon)
-                }
-            )
-            addView(
-                HorizontalScrollView(requireContext()).apply {
-                    addView(
-                        LinearLayout(requireContext()).apply {
-                            addView(
-                                ImageView(requireContext()).apply {
-                                    setImageResource(R.drawable.app_icon)
-                                }
-                            )
-                            addView(
-                                ImageView(requireContext()).apply {
-                                    setImageResource(R.drawable.app_icon)
-                                }
-                            )
-                            addView(
-                                ImageView(requireContext()).apply {
-                                    setImageResource(R.drawable.app_icon)
-                                }
-                            )
-                            addView(
-                                ImageView(requireContext()).apply {
-                                    setImageResource(R.drawable.app_icon)
-                                }
-                            )
-                        }
-                    )
-
-                }
-            )
-        }
-
         viewModel = ViewModelProvider(this)[UsersViewModel::class.java]
 
         return binding.root
