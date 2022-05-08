@@ -21,6 +21,11 @@ class UsersFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = UsersFragmentBinding.inflate(inflater)
+        viewModel.users.forEach{ user->
+            binding.llUsers.addView(
+                UserView(context = requireContext(), user = user)
+            )
+        }
         binding.btnNextFragment.setOnClickListener {
             findNavController().navigate(
                 UsersFragmentDirections.actionUsersFragmentToUsersEmployedFragment()

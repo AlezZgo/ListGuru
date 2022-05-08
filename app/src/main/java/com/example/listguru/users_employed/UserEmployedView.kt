@@ -4,12 +4,15 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.example.listguru.R
+import com.example.listguru.UserUI
 import com.example.listguru.databinding.ViewEmployedUserBinding
+
 
 class UserEmployedView  @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyle: Int = 0) :
+    defStyle: Int = 0,
+    user: UserUI? = null,) :
     androidx.cardview.widget.CardView(context, attrs, defStyle) {
 
     init {
@@ -32,7 +35,11 @@ class UserEmployedView  @JvmOverloads constructor(
             0
         ).apply {
             binding.tvName.text = getString(R.styleable.UserView_name)
-            binding.tvLastName.text = getInt(R.styleable.UserView_age,0).toString()
+            binding.tvAge.text = getInt(R.styleable.UserView_age,0).toString()
+        }
+        user?.let {
+            binding.tvName.text = user.name
+            binding.tvAge.text = user.age.toString()
         }
     }
 

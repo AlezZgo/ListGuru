@@ -1,43 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/llUsers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".users.UsersFragment">
-
-        <com.example.listguru.users.UserView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:age="young"
-            app:name="John" />
-
-        <com.example.listguru.users.UserView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:age="medium"
-            app:name="Karl" />
-
-        <com.example.listguru.users.UserView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:age="old"
-            app:name="Mike" />
-
-    </LinearLayout>
 
     <Button
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/btnNextFragment"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Next Fragment 2" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llUsers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".users.UsersFragment">
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>

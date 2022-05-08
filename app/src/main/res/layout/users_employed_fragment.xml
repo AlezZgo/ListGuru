@@ -7,31 +7,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/llUsers"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".users.UsersFragment">
-
-        <com.example.listguru.users_employed.UserEmployedView
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/llUsers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:age="young"
-            app:name="John" />
+            android:orientation="vertical"
+            tools:context=".users.UsersFragment"/>
+    </ScrollView>
 
-        <com.example.listguru.users_employed.UserEmployedView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:age="medium"
-            app:name="Karl" />
-
-        <com.example.listguru.users_employed.UserEmployedView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:age="old"
-            app:name="Mike" />
-
-    </LinearLayout>
 
 </LinearLayout>
