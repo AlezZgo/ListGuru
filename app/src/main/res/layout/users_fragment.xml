@@ -10,8 +10,18 @@
 
 
     <com.example.listguru.UserView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:name="John"
         app:lastname="Rid"/>
+    <com.example.listguru.UserView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:name="Karl"
+        app:lastname="Blur"/>
+    <com.example.listguru.UserView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:name="Mike"
+        app:lastname="Thomson"/>
 </LinearLayout>
