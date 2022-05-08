@@ -2,6 +2,10 @@
 <resources>
     <declare-styleable name="UserView">
         <attr name="name" format="string"/>
-        <attr name="lastname" format="string"/>
+        <attr name="age" format="integer">
+            <enum name="young" value="12"/>
+            <enum name="medium" value="42"/>
+            <enum name="old" value="60"/>
+        </attr>
     </declare-styleable>
 </resources>

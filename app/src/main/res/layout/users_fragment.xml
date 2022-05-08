@@ -8,20 +8,19 @@
     android:orientation="vertical"
     tools:context=".UsersFragment">
 
-
     <com.example.listguru.UserView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:name="John"
-        app:lastname="Rid"/>
+        app:age="young"/>
     <com.example.listguru.UserView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:name="Karl"
-        app:lastname="Blur"/>
+        app:age="medium"/>
     <com.example.listguru.UserView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:name="Mike"
-        app:lastname="Thomson"/>
+        app:age="old"/>
 </LinearLayout>

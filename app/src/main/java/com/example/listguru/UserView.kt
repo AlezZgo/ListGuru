@@ -24,8 +24,8 @@ class UserView  @JvmOverloads constructor(
             0,
             0
         ).apply {
-            binding.tvName.text = getString(R.styleable.UserView_name)?:"null"
-            binding.tvLastName.text = getString(R.styleable.UserView_lastname)?:"null"
+            binding.tvName.text = getString(R.styleable.UserView_name)
+            binding.tvLastName.text = getInt(R.styleable.UserView_age,0).toString()
         }
     }
 }
