@@ -9,5 +9,14 @@
         android:id="@+id/usersFragment"
         android:name="com.example.listguru.UsersFragment"
         android:label="UsersFragment"
-        tools:layout="@layout/users_fragment"/>
+        tools:layout="@layout/users_fragment">
+        <action
+            android:id="@+id/action_usersFragment_to_usersEmployedFragment"
+            app:destination="@id/usersEmployedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/usersEmployedFragment"
+        android:name="com.example.listguru.UsersEmployedFragment"
+        android:label="UsersEmployedFragment"
+        tools:layout="@layout/users_employed_fragment"/>
 </navigation>

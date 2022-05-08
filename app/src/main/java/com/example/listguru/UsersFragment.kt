@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.widget.NestedScrollView
+import androidx.navigation.fragment.findNavController
 import com.example.listguru.databinding.UsersFragmentBinding
 
 class UsersFragment : Fragment() {
@@ -21,7 +22,11 @@ class UsersFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = UsersFragmentBinding.inflate(inflater)
-
+        binding.btnNextFragment.setOnClickListener {
+            findNavController().navigate(
+                UsersFragmentDirections.actionUsersFragmentToUsersEmployedFragment()
+            )
+        }
         viewModel = ViewModelProvider(this)[UsersViewModel::class.java]
 
         return binding.root
