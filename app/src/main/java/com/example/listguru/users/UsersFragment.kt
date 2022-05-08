@@ -1,21 +1,20 @@
-package com.example.listguru
+package com.example.listguru.users
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.listguru.databinding.UsersFragmentBinding
 
 class UsersFragment : Fragment() {
 
-    private lateinit var viewModel: UsersViewModel
+    private val viewModel: UsersViewModel by viewModels()
 
-    private lateinit var binding : UsersFragmentBinding
+    private lateinit var binding: UsersFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +26,6 @@ class UsersFragment : Fragment() {
                 UsersFragmentDirections.actionUsersFragmentToUsersEmployedFragment()
             )
         }
-        viewModel = ViewModelProvider(this)[UsersViewModel::class.java]
 
         return binding.root
     }

@@ -1,21 +1,19 @@
-package com.example.listguru
+package com.example.listguru.users_employed
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.Constraints
-import com.example.listguru.databinding.ViewUserBinding
-import java.util.concurrent.ArrayBlockingQueue
+import com.example.listguru.R
+import com.example.listguru.databinding.ViewEmployedUserBinding
 
-class UserView  @JvmOverloads constructor(
+class UserEmployedView  @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0) :
     androidx.cardview.widget.CardView(context, attrs, defStyle) {
 
     init {
-        val binding = ViewUserBinding.inflate(
+        val binding = ViewEmployedUserBinding.inflate(
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
             this,
             true)

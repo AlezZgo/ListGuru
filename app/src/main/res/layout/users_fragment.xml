@@ -12,21 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context=".UsersFragment">
+        tools:context=".users.UsersFragment">
 
-        <com.example.listguru.UserView
+        <com.example.listguru.users.UserView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:age="young"
             app:name="John" />
 
-        <com.example.listguru.UserView
+        <com.example.listguru.users.UserView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:age="medium"
             app:name="Karl" />
 
-        <com.example.listguru.UserView
+        <com.example.listguru.users.UserView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:age="old"

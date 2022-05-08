@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/usersFragment"
-        android:name="com.example.listguru.UsersFragment"
+        android:name="com.example.listguru.users.UsersFragment"
         android:label="UsersFragment"
         tools:layout="@layout/users_fragment">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/usersEmployedFragment"
-        android:name="com.example.listguru.UsersEmployedFragment"
+        android:name="com.example.listguru.users_employed.UsersEmployedFragment"
         android:label="UsersEmployedFragment"
         tools:layout="@layout/users_employed_fragment"/>
 </navigation>
