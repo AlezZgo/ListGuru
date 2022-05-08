@@ -13,7 +13,7 @@ class UserView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0,
-    user: UserUI? = null,
+    private val user: UserUI? = null,
 ) : androidx.cardview.widget.CardView(context, attrs, defStyle) {
 
     private val binding by lazy {
@@ -47,9 +47,9 @@ class UserView @JvmOverloads constructor(
 
     }
 
-    fun onAgeClickListener(block : () ->Unit) : UserView {
+    fun onAgeClickListener(block : (age : Int) ->Unit) : UserView {
         binding.tvAge.setOnClickListener {
-            block()
+            block(user?.age ?: 0)
         }
         return this
     }
