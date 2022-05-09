@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.listguru.databinding.UsersEmployedFragmentBinding
+import com.example.listguru.users.UserUiToUserViewMapper
 import com.example.listguru.users.UserView
 
 class UsersEmployedFragment : Fragment() {
@@ -23,7 +25,14 @@ class UsersEmployedFragment : Fragment() {
 
         viewModel.users.forEach{ user->
             binding.llUsers.addView(
-                UserEmployedView(context = requireContext(), user = user)
+                user.map(
+                    requireContext(),
+                    UserEmployedUiToUserEmployedView.Base()) {
+                    Toast.makeText(
+                        requireContext(),
+                        " This is $it", Toast.LENGTH_LONG)
+                        .show()
+                }
             )
         }
 

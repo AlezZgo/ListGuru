@@ -23,12 +23,14 @@ class UsersFragment : Fragment() {
         binding = UsersFragmentBinding.inflate(inflater)
         viewModel.users.forEach { user ->
             binding.llUsers.addView(
-                UserView(
-                    context = requireContext(),
-                    user = user)
-                    .onAgeClickListener {
-                        Toast.makeText(requireContext(), "Hello world", Toast.LENGTH_LONG).show()
-                    }
+                user.map(
+                    requireContext(),
+                    UserUiToUserViewMapper.Base()) {
+                    Toast.makeText(
+                        requireContext(),
+                        " This is $it", Toast.LENGTH_LONG)
+                        .show()
+                }
             )
         }
 
