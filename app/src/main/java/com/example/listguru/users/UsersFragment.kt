@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,9 +24,7 @@ class UsersFragment : Fragment() {
         binding = UsersFragmentBinding.inflate(inflater)
         viewModel.users.forEach { user ->
             binding.llUsers.addView(
-                user.map(requireContext(),UserUiToUserViewMapper.Base()).setOnAgeClickListener {
-                    Toast.makeText(requireContext(),"It is $it",Toast.LENGTH_LONG).show()
-                }
+                user.map(requireContext(),UserUiToUserViewMapper.Base()) 
             )
         }
 
@@ -39,3 +38,4 @@ class UsersFragment : Fragment() {
     }
 
 }
+

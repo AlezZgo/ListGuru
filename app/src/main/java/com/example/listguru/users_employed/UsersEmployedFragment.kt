@@ -23,11 +23,7 @@ class UsersEmployedFragment : Fragment() {
 
         viewModel.users.forEach { user ->
             binding.llUsers.addView(
-                user.map(
-                    requireContext(), UserEmployedUiToUserEmployedViewMapper.Base())
-                    .setOnNameClickListener {
-                        Toast.makeText(requireContext(), "It is $it", Toast.LENGTH_LONG).show()
-                    }
+                user.map(requireContext(), UserEmployedUiToUserEmployedViewMapper.Base())
             )
         }
 

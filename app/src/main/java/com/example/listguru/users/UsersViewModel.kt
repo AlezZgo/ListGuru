@@ -5,12 +5,12 @@ import com.example.listguru.UserUI
 
 class UsersViewModel : ViewModel() {
     val users = listOf(
-        UserUI("Bob", 12),
-        UserUI("Alex", 62),
-        UserUI("Bill", 94),
-        UserUI("John", 24),
-        UserUI("Kate", 57),
-        UserUI("Robe", 35),
+        UserUI.Success("Bob", 12),
+        UserUI.Success("Alex", 62),
+        UserUI.Error("Not found exception"),
+        UserUI.Success("John", 24),
+        UserUI.Loading(50),
+        UserUI.Success("Robe", 35),
     )
 
 }

@@ -5,9 +5,9 @@ import com.example.listguru.UserUI
 
 class UsersEmployedViewModel : ViewModel() {
     val users = listOf(
-        UserUI("Fred", 64),
-        UserUI("Trevor", 22),
-        UserUI("Mark", 24),
+        UserUI.Success("Fred", 64),
+        UserUI.Error("Not found"),
+        UserUI.Loading( 24),
         )
 
 }

@@ -7,5 +7,6 @@
             <enum name="medium" value="42"/>
             <enum name="old" value="60"/>
         </attr>
+        <attr name="textError" format="string"/>
     </declare-styleable>
 </resources>
