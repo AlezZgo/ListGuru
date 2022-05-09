@@ -4,50 +4,37 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import com.example.listguru.R
+import com.example.listguru.core.CustomView
+import com.example.listguru.databinding.ViewEmployedUserBinding
 import com.example.listguru.databinding.ViewUserBinding
 
 @SuppressLint("ViewConstructor")
 class UserView @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet? = null,
     defStyle: Int = 0,
+    attrs: AttributeSet? = null,
     private val name: String = "",
     private val age: Int = 0,
     private val onAgeClickListener: (age: Int) -> Unit = { /*empty*/ },
-) : androidx.cardview.widget.CardView(context, attrs, defStyle) {
-
-    private val binding by lazy {
-        ViewUserBinding.inflate(
-            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
-            this,
-            true)
-    }
+) : CustomView<ViewUserBinding>(context, defStyle, attrs, ViewUserBinding::inflate) {
 
     init {
-        parent.apply {
-            radius = 8F
-            cardElevation = 8F
-            maxCardElevation = 8F
-            useCompatPadding = true
+        bindAttributes{
+            binding.tvName.text = it.getString(R.styleable.UserView_name)
+            binding.tvAge.text = it.getInt(R.styleable.UserView_age, 0).toString()
         }
+        bindUi()
+    }
 
-        context.theme.obtainStyledAttributes(
-            attrs,
-            R.styleable.UserView,
-            0,
-            0
-        ).apply {
-            binding.tvName.text = getString(R.styleable.UserView_name)
-            binding.tvAge.text = getInt(R.styleable.UserView_age, 0).toString()
-        }
+
+    override fun bindUi() {
         binding.tvName.text = name
         binding.tvAge.text = age.toString()
         binding.tvAge.setOnClickListener {
             onAgeClickListener.invoke(age)
         }
-
-
     }
 
 }
