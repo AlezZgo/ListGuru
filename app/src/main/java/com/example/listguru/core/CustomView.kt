@@ -16,20 +16,16 @@ typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 abstract class CustomView<B : ViewBinding> @JvmOverloads constructor(
     context: Context,
     defStyle: Int = 0,
-    protected val attrs: AttributeSet? = null,
-    private val inflate: Inflate<B>,
+    private val attrs: AttributeSet? = null,
+    inflate: Inflate<B>,
 ) : LinearLayout(context, attrs, defStyle) {
 
-    private var _viewBinding: B? = null
-    protected val binding get() = checkNotNull(_viewBinding)
-
-    init {
-        _viewBinding = inflate.invoke(
-            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
-            this,
-            true
-        )
-    }
+    private val _viewBinding: B = inflate.invoke(
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater,
+        this,
+        true
+    )
+    protected val binding get() = _viewBinding
 
     open fun bindAttributes(block: (typedArray: TypedArray) -> Unit) {
         context.theme.obtainStyledAttributes(
