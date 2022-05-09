@@ -1,13 +1,13 @@
 package com.example.listguru.users
 
 import android.content.Context
+import com.example.listguru.core.Abstract
 
-interface UserUiToUserViewMapper {
+interface UserUiToUserViewMapper : Abstract.Mapper {
     fun map(
         context: Context,
         name: String = "",
         age: Int = 0,
-        onAgeClickListener: (age: Int) -> Unit = {},
     ): UserView
 
     class Base : UserUiToUserViewMapper {
@@ -15,13 +15,12 @@ interface UserUiToUserViewMapper {
             context: Context,
             name: String,
             age: Int,
-            onAgeClickListener: (age: Int) -> Unit,
         ): UserView {
             return UserView(
                 context,
                 name = name,
                 age = age,
-                onAgeClickListener = onAgeClickListener)
+            )
         }
 
     }

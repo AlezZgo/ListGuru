@@ -8,8 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.listguru.databinding.UsersEmployedFragmentBinding
-import com.example.listguru.users.UserUiToUserViewMapper
-import com.example.listguru.users.UserView
 
 class UsersEmployedFragment : Fragment() {
 
@@ -23,15 +21,13 @@ class UsersEmployedFragment : Fragment() {
     ): View? {
         binding = UsersEmployedFragmentBinding.inflate(inflater)
 
-        viewModel.users.forEach{ user->
+        viewModel.users.forEach { user ->
             binding.llUsers.addView(
                 user.map(
-                    requireContext(),UserEmployedUiToUserEmployedView.Base()) {
-                    Toast.makeText(
-                        requireContext(),
-                        " This is $it", Toast.LENGTH_LONG)
-                        .show()
-                }
+                    requireContext(), UserEmployedUiToUserEmployedViewMapper.Base())
+                    .setOnNameClickListener {
+                        Toast.makeText(requireContext(), "It is $it", Toast.LENGTH_LONG).show()
+                    }
             )
         }
 

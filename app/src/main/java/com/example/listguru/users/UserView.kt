@@ -17,8 +17,8 @@ class UserView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     private val name: String = "",
     private val age: Int = 0,
-    private val onAgeClickListener: (age: Int) -> Unit = { /*empty*/ },
-) : CustomView<ViewUserBinding>(context, defStyle, attrs, ViewUserBinding::inflate) {
+) : CustomView<ViewUserBinding>(context, defStyle, attrs, ViewUserBinding::inflate),
+    OnAgeClick<UserView> {
 
     init {
         bindAttributes{
@@ -32,9 +32,13 @@ class UserView @JvmOverloads constructor(
     override fun bindUi() {
         binding.tvName.text = name
         binding.tvAge.text = age.toString()
+    }
+
+    override fun setOnAgeClickListener(block: (age: Int)->Unit) : UserView{
         binding.tvAge.setOnClickListener {
-            onAgeClickListener.invoke(age)
+            block.invoke(age)
         }
+        return this
     }
 
 }
