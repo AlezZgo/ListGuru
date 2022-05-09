@@ -26,8 +26,7 @@ class UsersEmployedFragment : Fragment() {
         viewModel.users.forEach{ user->
             binding.llUsers.addView(
                 user.map(
-                    requireContext(),
-                    UserEmployedUiToUserEmployedView.Base()) {
+                    requireContext(),UserEmployedUiToUserEmployedView.Base()) {
                     Toast.makeText(
                         requireContext(),
                         " This is $it", Toast.LENGTH_LONG)
