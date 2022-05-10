@@ -24,7 +24,7 @@ class UsersFragment : Fragment() {
         binding = UsersFragmentBinding.inflate(inflater)
         viewModel.users.forEach { user ->
             binding.llUsers.addView(
-                user.map(requireContext(),UserUiToUserViewMapper.Base()) 
+                user.map(requireContext(),UserUiToUserViewMapper.Base()) as View
             )
         }
 

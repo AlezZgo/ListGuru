@@ -23,7 +23,7 @@ class UsersEmployedFragment : Fragment() {
 
         viewModel.users.forEach { user ->
             binding.llUsers.addView(
-                user.map(requireContext(), UserEmployedUiToUserEmployedViewMapper.Base())
+                user.map(requireContext(), UserEmployedUiToUserEmployedViewMapper.Base()) as View
             )
         }
 
