@@ -3,27 +3,35 @@ package com.example.listguru.users
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
-import android.widget.LinearLayout
+import androidx.viewbinding.ViewBinding
 import com.example.listguru.R
-import com.example.listguru.core.CustomView
-import com.example.listguru.core.OnButtonClick
-import com.example.listguru.core.ProgressValue
-import com.example.listguru.databinding.ViewUserSuccessBinding
+import com.example.listguru.core.*
 import com.example.listguru.databinding.ViewUserErrorBinding
 import com.example.listguru.databinding.ViewUserLoadingBinding
+import com.example.listguru.databinding.ViewUserSuccessBinding
 
-interface UserView  {
+abstract class UserView<T : ViewBinding, C> @JvmOverloads constructor(
+    context: Context,
+    defStyle: Int = 0,
+    attrs: AttributeSet? = null,
+    inflate: Inflate<T>,
+) : CustomView<T>(context, defStyle, attrs, inflate),
+    OnClick, ProgressValue<ClickableView>, ClickableView {
 
-    @SuppressLint("ViewConstructor")
+    override fun setOnClickListener(block: (arg: UserClickedData) -> Unit) = Unit
+
+    override fun setProgressValue(value: Int): ClickableView = ClickableView.Empty
+
     class Success @JvmOverloads constructor(
         context: Context,
         defStyle: Int = 0,
         attrs: AttributeSet? = null,
         private val name: String = "",
         private val age: Int = 0,
-    ) : CustomView<ViewUserSuccessBinding>(context, defStyle, attrs, ViewUserSuccessBinding::inflate),
-        OnAgeClick<UserView>, UserView {
+    ) : UserView<ViewUserSuccessBinding, Int>(context,
+        defStyle,
+        attrs,
+        ViewUserSuccessBinding::inflate) {
 
         init {
             bindAttributes {
@@ -38,23 +46,23 @@ interface UserView  {
             binding.tvAge.text = age.toString()
         }
 
-        override fun setOnAgeClickListener(block: (age: Int) -> Unit): UserView {
+        override fun setOnClickListener(block: (data: UserClickedData) -> Unit)  {
             binding.tvAge.setOnClickListener {
-                block.invoke(age)
+                block.invoke(
+                    UserClickedData.Age(age)
+                )
             }
-            return this
         }
-
     }
 
-    @SuppressLint("ViewConstructor")
     class Error @JvmOverloads constructor(
         context: Context,
         defStyle: Int = 0,
         attrs: AttributeSet? = null,
         private val errorMessage: String = "Error",
-    ) : CustomView<ViewUserErrorBinding>(context, defStyle, attrs, ViewUserErrorBinding::inflate),
-        UserView, OnButtonClick<UserView> {
+    ) : UserView<ViewUserErrorBinding, Unit>(
+        context, defStyle, attrs, ViewUserErrorBinding::inflate
+    ) {
 
         init {
             bindAttributes {
@@ -67,22 +75,23 @@ interface UserView  {
             binding.tvError.text = errorMessage
         }
 
-        override fun setOnButtonClick(block: () -> Unit): UserView {
+        override fun setOnClickListener(block: (data: UserClickedData) -> Unit) {
             binding.btnTryAgain.setOnClickListener {
-                block.invoke()
+                block.invoke(UserClickedData.TryAgain)
             }
-            return this
         }
-
     }
+
     @SuppressLint("ViewConstructor")
     class Loading @JvmOverloads constructor(
         context: Context,
         defStyle: Int = 0,
         attrs: AttributeSet? = null,
-        private val progressValue: Int
-    ) : CustomView<ViewUserLoadingBinding>(context, defStyle, attrs, ViewUserLoadingBinding::inflate),
-        UserView, ProgressValue<UserView> {
+        private val progressValue: Int,
+    ) : UserView<ViewUserLoadingBinding, Unit>(
+        context, defStyle, attrs, ViewUserLoadingBinding::inflate
+    ) {
+
         init {
             bindUi()
         }
@@ -91,11 +100,13 @@ interface UserView  {
             binding.pbLoading.progress = progressValue
         }
 
-        override fun setProgressValue(value: Int): UserView {
+        override fun setProgressValue(value: Int): ClickableView {
             binding.pbLoading.progress
+
+            //todo зачем
             return this
         }
-
     }
-}
 
+
+}

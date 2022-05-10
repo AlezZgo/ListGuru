@@ -2,52 +2,26 @@ package com.example.listguru.users_employed
 
 import android.content.Context
 import com.example.listguru.core.Abstract
-import com.example.listguru.users.UserView
 
-interface UserEmployedUiToUserEmployedViewMapper : Abstract.Mapper {
-    fun map(
-        context: Context,
-        name: String = "",
-        age: Int = 0,
-    ): UserEmployedView
+interface UserEmployedUiToUserEmployedViewMapper : Abstract.UserMapper<UserEmployedView<*,*>> {
 
-    fun map(
-        context: Context,
-        errorMessage: String = "Error",
-    ): UserEmployedView
+    class Base(
+        private val context: Context,
+    ) : UserEmployedUiToUserEmployedViewMapper {
 
-    fun map(
-        context: Context,
-        progressValue: Int,
-    ): UserEmployedView
+        override fun map(name: String, age: Int) = UserEmployedView.Success(
+            context, name = name, age = age
+        )
 
+        override fun map(errorMessage: String) = UserEmployedView.Error(
+            context,
+            errorMessage = errorMessage
+        )
 
-    class Base : UserEmployedUiToUserEmployedViewMapper{
-        override fun map(
-            context: Context,
-            name: String,
-            age: Int,
-        ): UserEmployedView {
-            return UserEmployedView.Success(
-                context,
-                name = name,
-                age = age,
-            )
-        }
-
-        override fun map(context: Context, errorMessage: String): UserEmployedView {
-            return UserEmployedView.Error(
-                context,
-                errorMessage = errorMessage
-            )
-        }
-
-        override fun map(context: Context, progressValue: Int): UserEmployedView {
-
-            return UserEmployedView.Loading(
-                context, progressValue = progressValue
-            )
-        }
+        override fun map(progressValue: Int) = UserEmployedView.Loading(
+            context, progressValue = progressValue
+        )
 
     }
+
 }

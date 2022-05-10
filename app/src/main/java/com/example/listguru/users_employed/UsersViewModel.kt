@@ -7,7 +7,7 @@ class UsersEmployedViewModel : ViewModel() {
     val users = listOf(
         UserUI.Success("Fred", 64),
         UserUI.Error("Not found"),
-        UserUI.Loading( 24),
-        )
+        UserUI.Loading(24),
+    )
 
 }

@@ -3,48 +3,24 @@ package com.example.listguru.users
 import android.content.Context
 import com.example.listguru.core.Abstract
 
-interface UserUiToUserViewMapper : Abstract.Mapper {
-    fun map(
-        context: Context,
-        name: String = "",
-        age: Int = 0,
-    ): UserView.Success
+interface UserUiToUserViewMapper : Abstract.UserMapper<UserView<*, *>> {
 
-    fun map(
-        context: Context,
-        errorMessage: String = "Error",
-    ): UserView.Error
+    class Base(
+        private val context: Context,
+    ) : UserUiToUserViewMapper {
 
-    fun map(
-        context: Context,
-        progressValue: Int,
-    ): UserView.Loading
+        override fun map(name: String, age: Int) = UserView.Success(
+            context, name = name, age = age
+        )
 
-    class Base : UserUiToUserViewMapper {
-        override fun map(
-            context: Context,
-            name: String,
-            age: Int,
-        ): UserView.Success {
-            return UserView.Success(
-                context,
-                name = name,
-                age = age,
-            )
-        }
+        override fun map(errorMessage: String) = UserView.Error(
+            context,
+            errorMessage = errorMessage
+        )
 
-        override fun map(context: Context, errorMessage: String): UserView.Error {
-            return UserView.Error(
-                context,
-                errorMessage = errorMessage
-            )
-        }
-
-        override fun map(context: Context, progressValue: Int): UserView.Loading {
-            return UserView.Loading(
-                context, progressValue = progressValue
-            )
-        }
+        override fun map(progressValue: Int) = UserView.Loading(
+            context, progressValue = progressValue
+        )
 
     }
 }

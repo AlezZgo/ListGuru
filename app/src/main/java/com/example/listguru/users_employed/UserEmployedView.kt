@@ -3,16 +3,26 @@ package com.example.listguru.users_employed
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import androidx.viewbinding.ViewBinding
 import com.example.listguru.R
-import com.example.listguru.core.CustomView
-import com.example.listguru.core.OnButtonClick
-import com.example.listguru.core.ProgressValue
+import com.example.listguru.core.*
 import com.example.listguru.databinding.ViewEmployedUserBinding
 import com.example.listguru.databinding.ViewUserErrorBinding
 import com.example.listguru.databinding.ViewUserLoadingBinding
+import com.example.listguru.databinding.ViewUserSuccessBinding
+import com.example.listguru.users.UserView
 
+abstract class UserEmployedView<T : ViewBinding, C> @JvmOverloads constructor(
+    context: Context,
+    defStyle: Int = 0,
+    attrs: AttributeSet? = null,
+    inflate: Inflate<T>,
+) : CustomView<T>(context, defStyle, attrs, inflate),
+    OnClick, ProgressValue<ClickableView>, ClickableView {
 
-interface UserEmployedView {
+    override fun setOnClickListener(block: (arg: UserClickedData) -> Unit) = Unit
+
+    override fun setProgressValue(value: Int): ClickableView = ClickableView.Empty
 
     class Success @JvmOverloads constructor(
         context: Context,
@@ -20,11 +30,12 @@ interface UserEmployedView {
         attrs: AttributeSet? = null,
         private val name: String = "",
         private val age: Int = 0,
-    ) : CustomView<ViewEmployedUserBinding>(context,
+    ) : UserEmployedView<ViewUserSuccessBinding, Int>(context,
         defStyle,
         attrs,
-        ViewEmployedUserBinding::inflate),
-        OnNameClick<UserEmployedView>, UserEmployedView {
+        ViewUserSuccessBinding::inflate) {
+
+
 
         init {
             bindAttributes {
@@ -39,11 +50,12 @@ interface UserEmployedView {
             binding.tvAge.text = age.toString()
         }
 
-        override fun setOnNameClickListener(block: (name: String) -> Unit): UserEmployedView {
+        override fun setOnClickListener(block: (arg: UserClickedData) -> Unit) {
             binding.tvName.setOnClickListener {
-                block.invoke(name)
+                block.invoke(
+                    UserClickedData.Name(name)
+                )
             }
-            return this
         }
     }
 
@@ -53,8 +65,9 @@ interface UserEmployedView {
         defStyle: Int = 0,
         attrs: AttributeSet? = null,
         private val errorMessage: String = "Error",
-    ) : CustomView<ViewUserErrorBinding>(context, defStyle, attrs, ViewUserErrorBinding::inflate),
-        UserEmployedView, OnButtonClick<UserEmployedView> {
+    ) : UserEmployedView<ViewUserErrorBinding, Unit>(
+        context, defStyle, attrs, ViewUserErrorBinding::inflate
+    ) {
 
         init {
             bindAttributes {
@@ -67,11 +80,10 @@ interface UserEmployedView {
             binding.tvError.text = errorMessage
         }
 
-        override fun setOnButtonClick(block: () -> Unit): UserEmployedView {
+        override fun setOnClickListener(block: (data: UserClickedData) -> Unit) {
             binding.btnTryAgain.setOnClickListener {
-                block.invoke()
+                block.invoke(UserClickedData.TryAgain)
             }
-            return this
         }
 
     }
@@ -82,11 +94,9 @@ interface UserEmployedView {
         defStyle: Int = 0,
         attrs: AttributeSet? = null,
         private val progressValue: Int,
-    ) : CustomView<ViewUserLoadingBinding>(context,
-        defStyle,
-        attrs,
-        ViewUserLoadingBinding::inflate),
-        UserEmployedView, ProgressValue<UserEmployedView> {
+    ) : UserEmployedView<ViewUserLoadingBinding, Unit>(
+        context, defStyle, attrs, ViewUserLoadingBinding::inflate
+    ) {
         init {
             bindUi()
         }
@@ -95,7 +105,7 @@ interface UserEmployedView {
             binding.pbLoading.progress = progressValue
         }
 
-        override fun setProgressValue(value: Int): UserEmployedView {
+        override fun setProgressValue(value: Int): ClickableView {
             binding.pbLoading.progress
             return this
         }

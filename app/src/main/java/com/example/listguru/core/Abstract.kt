@@ -1,14 +1,14 @@
 package com.example.listguru.core
 
-import android.content.Context
-
 interface Abstract {
+    interface UserMapper<T> {
 
-    interface ObjectUI<M: Mapper,T>{
-        fun map(context: Context,mapper: M): T
+        fun map(name: String, age: Int): T
+        fun map(errorMessage: String): T
+        fun map(progressValue: Int): T
     }
 
-    interface Mapper{
-        class Empty: Mapper
+    interface User {
+        fun <T> map(mapper: UserMapper<T>): T
     }
 }

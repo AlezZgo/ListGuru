@@ -1,67 +1,28 @@
 package com.example.listguru
 
-import android.content.Context
-import com.example.listguru.users.MappableToUserView
-import com.example.listguru.users.UserUiToUserViewMapper
-import com.example.listguru.users.UserView
-import com.example.listguru.users_employed.MappableToUserEmployedView
-import com.example.listguru.users_employed.UserEmployedUiToUserEmployedViewMapper
-import com.example.listguru.users_employed.UserEmployedView
+import com.example.listguru.core.Abstract
 
-sealed class UserUI : MappableToUserView {
-
-    //todo Вынести в интерфейс
-    abstract fun map(
-        context: Context,
-        mapper: UserEmployedUiToUserEmployedViewMapper,
-    ): UserEmployedView
+sealed class UserUI : Abstract.User {
 
     data class Success(
         private val name: String,
         private val age: Int,
     ) : UserUI() {
-        override fun map(context: Context, mapper: UserUiToUserViewMapper): UserView {
-            return mapper.map(context, name, age)
-        }
 
-        override fun map(
-            context: Context,
-            mapper: UserEmployedUiToUserEmployedViewMapper,
-        ): UserEmployedView {
-            return mapper.map(context, name, age)
-        }
-
+        override fun <T> map(mapper: Abstract.UserMapper<T>): T = mapper.map(name, age)
     }
 
     data class Error(
         private val errorMessage: String,
     ) : UserUI() {
-        override fun map(context: Context, mapper: UserUiToUserViewMapper): UserView {
-            return mapper.map(context,errorMessage)
-        }
 
-        override fun map(
-            context: Context,
-            mapper: UserEmployedUiToUserEmployedViewMapper,
-        ): UserEmployedView {
-            return mapper.map(context,errorMessage)
-        }
+        override fun <T> map(mapper: Abstract.UserMapper<T>): T = mapper.map(errorMessage)
     }
 
     data class Loading(
-        private val progressValue : Int
+        private val progressValue: Int,
     ) : UserUI() {
-        override fun map(context: Context, mapper: UserUiToUserViewMapper): UserView {
-            return mapper.map(context, progressValue = progressValue)
-        }
-
-        override fun map(
-            context: Context,
-            mapper: UserEmployedUiToUserEmployedViewMapper,
-        ): UserEmployedView {
-            return mapper.map(context, progressValue = progressValue)
-        }
-
+        override fun <T> map(mapper: Abstract.UserMapper<T>): T = mapper.map(progressValue)
     }
 
 
